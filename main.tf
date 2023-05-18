@@ -244,7 +244,7 @@ resource "azurerm_linux_virtual_machine" "k8a" {
 
   admin_ssh_key {
     username   = "kroo"
-    public_key = file("./key-pair.pub")
+    public_key = file("key-pair.pub")
   }
 
   os_disk {
@@ -279,7 +279,7 @@ resource "azurerm_linux_virtual_machine" "k8b" {
 
   admin_ssh_key {
     username   = "kroo"
-    public_key = file("./key-pair.pub")
+    public_key = file("key-pair.pub")
   }
 
   os_disk {
