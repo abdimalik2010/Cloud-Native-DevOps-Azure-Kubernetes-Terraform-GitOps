@@ -4,4 +4,5 @@ az storage account create -n hasstorage123 -g terraformremotebackend -l westeuro
 
 az storage container create -n hasstorage123
 
-az storage container create --name tfterraform --account-name hasstorage123 --account-key <storage_account_key>
+az storage container create --name tfterraform --account-name hasstorage123 
+
