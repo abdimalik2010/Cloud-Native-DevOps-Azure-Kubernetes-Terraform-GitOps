@@ -1,1 +1,4 @@
 *.terraform*
+.github/
+key*
+terraform.*
