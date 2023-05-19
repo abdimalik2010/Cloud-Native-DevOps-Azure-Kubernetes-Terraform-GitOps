@@ -32,3 +32,9 @@ variable "custom_data" {
   description = "The custom data for cloud-init"
   type        = string
 }
+
+
+variable "public_key" {
+   
+  type        = string
+}

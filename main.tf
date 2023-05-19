@@ -102,6 +102,7 @@ module "control_plane" {
   admin_username        = "kroo"
   network_interface_ids = [module.masternode_interface.masternode_interface_id,]
   custom_data           = base64encode(data.template_file.master-node-cloud-init.rendered)
+  public_key = file("./key-pair.pub")
 }
 data "template_file" "master-node-cloud-init" {
   template = file("./scripts/master-node-user-data.sh")
@@ -123,6 +124,7 @@ module "worker_nodes" {
   admin_username        = "kroo"
   network_interface_ids = [module.worker_node_interface.masternode_interface_id,]
   custom_data           = base64encode(data.template_file.worker-node-cloud-init.rendered)
+  public_key = file("./key-pair.pub")
 
   depends_on = [module.control_plane]
 }
