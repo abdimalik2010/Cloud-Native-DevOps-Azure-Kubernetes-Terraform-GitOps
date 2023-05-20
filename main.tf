@@ -5,8 +5,9 @@ terraform {
     storage_account_name = "hasstorage123"
     container_name       = "tfterraform"
     key                  = "terraform.tfstate"
-    access_key           = "RPX9N5yeWDYeEZBqfC7W4zQMXrhO1c9p4Owf6/0dlxQw+n52E4PvnhgHUUSvY8JSKLOBaJTBWGC++AStbNSNTw=="
+    access_key           = "yZ1EDLIcejvZWrBE43Ecu+ZQ1J3EjSDhoRTxu+SMXZH8Z1GhlpohtWZi5P4EWRHqwQejZigZMpdt+AStFe/hzw=="
   }
+
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -30,7 +31,6 @@ module "public_ip" {
   resource_group_name = azurerm_resource_group.k8.name
   location            = azurerm_resource_group.k8.location
 }
-
 
 module "network_security_group_k8a" {
   source = "./modules/masternode-nsg"
@@ -74,7 +74,7 @@ module "masternode_interface" {
   ip_configuration = {
     name                          = "master"
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = module.public_ip.masternode-ip
+    public_ip_address_id          = module.public_ip.static-ips[0].id
 
   }
 }
@@ -88,7 +88,7 @@ module "worker_node_interface" {
   ip_configuration = {
     name                          = "internal"
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id          = module.public_ip.workernode-ip
+    public_ip_address_id          = module.public_ip.static-ips[1].id
   }
 }
 
@@ -100,9 +100,9 @@ module "control_plane" {
   location              = azurerm_resource_group.k8.location
   size                  = "Standard_F2"
   admin_username        = "kroo"
-  network_interface_ids = [module.masternode_interface.masternode_interface_id,]
+  network_interface_ids = [module.masternode_interface.masternode_interface_id, ]
   custom_data           = base64encode(data.template_file.master-node-cloud-init.rendered)
-  public_key = file("./key-pair.pub")
+  public_key            = file("./key-pair.pub")
 }
 data "template_file" "master-node-cloud-init" {
   template = file("./scripts/master-node-user-data.sh")
@@ -110,8 +110,6 @@ data "template_file" "master-node-cloud-init" {
 data "template_file" "worker-node-cloud-init" {
   template = file("./scripts/worker-node-user-data.sh")
 }
-
-
 
 # Create worker nodes VMs
 module "worker_nodes" {
@@ -122,9 +120,10 @@ module "worker_nodes" {
   location              = azurerm_resource_group.k8.location
   size                  = "Standard_F2"
   admin_username        = "kroo"
-  network_interface_ids = [module.worker_node_interface.masternode_interface_id,]
+  network_interface_ids = [module.worker_node_interface.masternode_interface_id, ]
   custom_data           = base64encode(data.template_file.worker-node-cloud-init.rendered)
-  public_key = file("./key-pair.pub")
+  public_key            = file("./key-pair.pub")
 
   depends_on = [module.control_plane]
 }
+

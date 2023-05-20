@@ -35,6 +35,6 @@ variable "custom_data" {
 
 
 variable "public_key" {
-   
-  type        = string
+
+  type = string
 }

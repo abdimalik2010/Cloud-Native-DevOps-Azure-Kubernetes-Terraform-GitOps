@@ -1,3 +1,7 @@
 *.terraform*
 key*
 terraform.*
+*.tfvars
+*.conf
+null*
+READme.md

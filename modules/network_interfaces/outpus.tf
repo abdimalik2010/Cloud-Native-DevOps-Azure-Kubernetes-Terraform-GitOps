@@ -1,5 +1,5 @@
 output "masternode_interface_id" {
-    value = azurerm_network_interface.network_interface.id
-  
+  value = azurerm_network_interface.network_interface.id
+
 }
 
