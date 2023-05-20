@@ -80,5 +80,6 @@ jobs:
     if: ${{ needs.CD.result == 'success' }}
     steps:
       - name: Run join-worker-node.sh script
-        run: ./scripts/join-worker-node.sh
+        run: ./scripts
+/join-worker-node.sh
 
