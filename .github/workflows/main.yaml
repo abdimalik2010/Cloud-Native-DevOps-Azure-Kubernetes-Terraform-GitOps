@@ -76,12 +76,11 @@ jobs:
 
   WORKERNODESJOINER:
     needs: [CD]
-    runs-on: ubuntu-latest
+    runs-on: centos:7
     if: ${{ needs.CD.result == 'success' }}
     steps:
       - run: ls
       - run: pwd
-      - run: find / -name "join-worker-node.sh"
       - name: Set executable permissions for the script
         run: chmod +x ./home/runner/work/Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/scripts/join-worker-node.sh
       - name: Run join-worker-node.sh script
