@@ -79,5 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.CD.result == 'success' }}
     steps:
+      - name: Make join-worker-node.sh executable
+        run: chmod +x ./scripts/join-worker-node.sh
       - name: Run join-worker-node.sh script
-        run: ls
+        run: ./scripts/join-worker-node.sh
