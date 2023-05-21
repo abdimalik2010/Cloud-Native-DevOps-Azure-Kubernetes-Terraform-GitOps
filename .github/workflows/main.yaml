@@ -79,6 +79,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ needs.CD.result == 'success' }}
     steps:
+      - name: Set executable permissions for the script
+        run: chmod +x ./Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/scripts/join-worker-node.sh
       - name: Run join-worker-node.sh script
-        run: ./scripts/join-worker-node.sh
+        run: ./Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/scripts/join-worker-node.sh
 
