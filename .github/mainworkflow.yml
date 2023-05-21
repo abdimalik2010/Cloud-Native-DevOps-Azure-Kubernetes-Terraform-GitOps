@@ -73,11 +73,11 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
-
-  WORKERNODESJOINER:
-    needs: [CD]
-    runs-on: ubuntu-latest
-    if: ${{ needs.CD.result == 'success' }}
-    steps:
-      - name: Run join-worker-node.sh script
-        run: ./scripts/join-worker-node.sh
+        
+ join-worker-node:
+  needs: [CD]
+  runs-on: ubuntu-latest
+  if: ${{ needs.CD.result == 'success' }}
+  steps:
+    - name: Run join-worker-node.sh script
+      run: ./scripts/join-worker-node.sh

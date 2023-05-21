@@ -5,7 +5,6 @@ terraform {
     storage_account_name = "hasstorage123"
     container_name       = "tfterraform"
     key                  = "terraform.tfstate"
-    access_key           = "yZ1EDLIcejvZWrBE43Ecu+ZQ1J3EjSDhoRTxu+SMXZH8Z1GhlpohtWZi5P4EWRHqwQejZigZMpdt+AStFe/hzw=="
   }
 
   required_providers {
