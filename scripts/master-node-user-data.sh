@@ -105,7 +105,3 @@ curl https://raw.githubusercontent.com/projectcalico/calico/v3.25.0/manifests/ca
 
 # Issue the following command to install Calico.
 kubectl apply -f canal.yaml
-
-# Join the worker nodes
-
-sudo ./join-worker-node.sh 

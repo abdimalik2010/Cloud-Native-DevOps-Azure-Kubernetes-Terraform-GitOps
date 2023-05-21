@@ -1,6 +1,7 @@
 #! /bin/bash
+
 # Check first if the server configured correctly and the network security group configured accordinly
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade -y
 sudo apt install -y apache2
 sudo systemctl start apache2
 sudo systemctl enable apache2
@@ -22,7 +23,6 @@ cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
 overlay
 br_netfilter
 EOF
-
 sudo modprobe overlay
 sudo modprobe br_netfilter
 
@@ -33,7 +33,6 @@ net.bridge.bridge-nf-call-iptables  = 1
 net.bridge.bridge-nf-call-ip6tables = 1
 net.ipv4.ip_forward                 = 1
 EOF
-
 
 # Apply sysctl params without reboot
 
@@ -78,6 +77,4 @@ sudo apt update
 sudo apt install -y kubelet kubeadm kubectl
 sudo apt-mark hold kubelet kubeadm kubectl
 
-sudo ./join-worker-node.sh 
-
-
+#sudo ./join-worker-node.sh 
