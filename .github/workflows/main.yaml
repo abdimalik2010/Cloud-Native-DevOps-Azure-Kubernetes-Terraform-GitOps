@@ -82,7 +82,8 @@ jobs:
       - run: ls
       - run: pwd
       - name: Set executable permissions for the script
-        run: chmod +x ./Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/scripts/join-worker-node.sh
+        run: chmod +x ./home/runner/work/Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/scripts/join-worker-node.sh
       - name: Run join-worker-node.sh script
-        run: ./Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/scripts/join-worker-node.sh
+        run: ./home/runner/work/Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps/scripts/join-worker-node.sh
+
 
