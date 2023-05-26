@@ -47,6 +47,9 @@ module "kubernetes_cluster" {
   resource_group_name = module.resource_group.name
   dns_prefix          = "aksaks1"
   vnet_subnet_id      = module.subnet.subnet
+  client_id     = var.ARM_CLIENT_ID
+  client_secret = var.ARM_CLIENT_SECRET
+  
 
 }
 
