@@ -19,11 +19,11 @@ variable "vnet_subnet_id" {
 
 }
 
-variable "AZURE_CLIENT_ID" {
+variable "ARM_CLIENT_ID" {
   type = string
   sensitive = true
 }
-variable "AZURE_CLIENT_SECRET" {
+variable "ARM_CLIENT_SECRET" {
   type = string
   sensitive = true
 
