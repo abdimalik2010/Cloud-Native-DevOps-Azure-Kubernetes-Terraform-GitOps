@@ -19,8 +19,15 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size    = "Standard_D2_v2"
   }
 
+
  service_principal {
    client_id = var.AZURE_CLIENT_ID
    client_secret = var.AZURE_CLIENT_SECRET
  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+
 }
