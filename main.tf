@@ -22,7 +22,7 @@ provider"azuread"{}
 
 # Service Principal Which is being used by AKS.
 data "azuread_service_principal" "akssp"{
-    display_name = "aksexam-sp"
+    display_name = "akssp2"
 }
 
 module "resource_group" {
