@@ -30,7 +30,7 @@ jobs:
       - name: Terraform plan
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > key-pair.pub
-          terraform plan -input=false
+          terraform plan -input=false -var "ARM_CLIENT_ID=${{ env.ARM_CLIENT_ID }}" -var "ARM_CLIENT_SECRET=${{ env.ARM_CLIENT_SECRET }}"
 
   tfsec:
     # Tfsec - Security Scan job
@@ -69,7 +69,7 @@ jobs:
       - name: Terraform plan
         run: |
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > key-pair.pub
-          terraform plan -var "ARM_CLIENT_ID=${{ env.ARM_CLIENT_ID }}" -var "ARM_CLIENT_SECRET=${{ env.ARM_CLIENT_SECRET }}"
+          terraform plan -input=false -var "ARM_CLIENT_ID=${{ env.ARM_CLIENT_ID }}" -var "ARM_CLIENT_SECRET=${{ env.ARM_CLIENT_SECRET }}"
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -var "ARM_CLIENT_ID=${{ env.ARM_CLIENT_ID }}" -var "ARM_CLIENT_SECRET=${{ env.ARM_CLIENT_SECRET }}"
