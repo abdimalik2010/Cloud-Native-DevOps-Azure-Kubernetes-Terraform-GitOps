@@ -21,8 +21,8 @@ resource "azurerm_kubernetes_cluster" "aks" {
 
 
  service_principal {
-   client_id = var.AZURE_CLIENT_ID
-   client_secret = var.AZURE_CLIENT_SECRET
+   client_id = var.ARM_CLIENT_ID
+   client_secret = var.ARM_CLIENT_SECRET
  }
 
   identity {
