@@ -5,5 +5,4 @@ variable "ARM_CLIENT_ID" {
 variable "ARM_CLIENT_SECRET" {
   type = string
   sensitive = true
-
 }
