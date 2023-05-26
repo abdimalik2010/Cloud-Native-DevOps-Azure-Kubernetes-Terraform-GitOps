@@ -72,4 +72,8 @@ jobs:
           terraform plan -input=false
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false
+        run: |
+          echo "${{ secrets.AZURE_CLIENT_ID }}" > secrets.AZURE_CLIENT_ID
+          echo "${{ secrets.AZURE_CLIENT_ID }}" > secrets.AZURE_CLIENT_ID
+          terraform apply -auto-approve -input=false
+
