@@ -16,4 +16,16 @@ variable "dns_prefix" {
 
 variable "vnet_subnet_id" {
   description = "The ID of the subnet where the Kubernetes cluster will be deployed."
+
+}
+
+variable "AZURE_CLIENT_ID" {
+  type = string
+  sensitive = true
+}
+variable "AZURE_CLIENT_SECRET" {
+  type = string
+  sensitive = true
+
+
 }
