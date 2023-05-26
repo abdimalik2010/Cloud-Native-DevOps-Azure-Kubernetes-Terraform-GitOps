@@ -25,9 +25,4 @@ resource "azurerm_kubernetes_cluster" "aks" {
    client_secret = var.ARM_CLIENT_SECRET
  }
 
-  identity {
-    type = "SystemAssigned"
-  }
-
-
 }
