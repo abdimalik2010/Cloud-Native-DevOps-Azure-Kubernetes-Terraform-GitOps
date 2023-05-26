@@ -18,6 +18,12 @@ provider "azurerm" {
   features {
   }
 }
+provider"azuread"{}
+
+# Service Principal Which is being used by AKS.
+data "azuread_service_principal" "akssp"{
+    display_name = "aksexam-sp"
+}
 
 module "resource_group" {
   source   = "./modules/resource_group"
@@ -70,7 +76,7 @@ module "acr" {
 module "acr_aks_assignment" {
   source                           = "./modules/acr-aks-assignment"
   acr_id                           = module.acr.acr_id
-  aks_principal_id                     = module.kubernetes_cluster.cluster_kubelet_identity
+  aks_principal_id                 = data.azuread_service_principal.akssp.object_id
 }
 
 
