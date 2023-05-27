@@ -53,7 +53,7 @@ module "kubernetes_cluster" {
   resource_group_name = module.resource_group.name
   dns_prefix          = "aksaks1"
   vnet_subnet_id      = module.subnet.subnet
-  ARM_CLIENT_ID = var.ARM_CLIENT_ID
+  ARM_CLIENT_ID = data.azuread_service_principal.akssp.application_id
   ARM_CLIENT_SECRET = var.ARM_CLIENT_SECRET
   
 
