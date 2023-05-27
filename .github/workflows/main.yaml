@@ -94,7 +94,8 @@ jobs:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: '${{ secrets.cluster_name }}'
           resource-group: '${{ secrets.resource_group }}' 
-        
+      - name: Make deployment file executable
+        run: chmod +x deployment.yaml
       - uses: Azure/k8s-deploy@v1
         with:
           manifests: |
