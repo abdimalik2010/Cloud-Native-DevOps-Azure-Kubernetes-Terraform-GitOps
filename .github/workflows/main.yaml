@@ -87,22 +87,18 @@ jobs:
         uses: azure/login@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
+      
       - name: Set AKS context
-        id: set-context
-        uses: azure/aks-set-context@v3
+        uses: Azure/aks-set-context@v1
         with:
-          resource-group: '${{ secrets.resource_group }}' 
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: '${{ secrets.cluster_name }}'
-      - name: Setup kubectl
-        id: install-kubectl
-        uses: azure/setup-kubectl@v3
-      - name: Deploy to AKS
-        id: deploy-aks
-        uses: Azure/k8s-deploy@v4
+          resource-group: '${{ secrets.resource_group }}' 
+        
+      - uses: Azure/k8s-deploy@v1
         with:
-          namespace: 'default'
           manifests: |
-             src/app.yaml
-
+           src/app.yaml
+     
 
          
