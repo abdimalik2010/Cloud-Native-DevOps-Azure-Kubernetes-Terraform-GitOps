@@ -87,17 +87,17 @@ jobs:
         uses: azure/login@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
-      
       - name: Set AKS context
         uses: Azure/aks-set-context@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: '${{ secrets.cluster_name }}'
           resource-group: '${{ secrets.resource_group }}' 
-      - uses: Azure/k8s-deploy@v1
+      - uses: Azure/k8s-deploy@v4
         with:
+          action: deploy
           manifests: |
-            deployment.yaml
+            deployment.yml
      
 
          
