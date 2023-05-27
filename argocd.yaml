@@ -13,5 +13,8 @@ spec:
     repoURL: https://github.com/abdimalik2010/Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps
     targetRevision: main
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true
