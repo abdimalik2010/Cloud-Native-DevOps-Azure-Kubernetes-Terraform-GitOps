@@ -99,13 +99,6 @@ jobs:
 
       - name: Configure AKS
         run: az aks get-credentials --resource-group aks-resources --name aks-aks1
-
-      - name: Build and Push Docker Image
-        run: |
-          docker build -t krooazurecontainerregistry.azurecr.io/my-image:latest .
-          docker login krooazurecontainerregistry.azurecr.io -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
-          docker push krooazurecontainerregistry.azurecr.io/my-image:latest
-
       - name: Deploy Application to AKS
         run: kubectl apply -f ./src/app.yaml
 
