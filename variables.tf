@@ -1,9 +1,9 @@
 #variable "ARM_CLIENT_ID" {
- # type = string
-  #sensitive = true
+# type = string
+#sensitive = true
 #}
 variable "ARM_CLIENT_SECRET" {
-  type = string
+  type      = string
   sensitive = true
 
 }

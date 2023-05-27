@@ -18,11 +18,11 @@ provider "azurerm" {
   features {
   }
 }
-provider"azuread"{}
+provider "azuread" {}
 
 # Service Principal Which is being used by AKS.
-data "azuread_service_principal" "akssp"{
-    display_name = "akssp2"
+data "azuread_service_principal" "akssp" {
+  display_name = "akssp2"
 }
 
 module "resource_group" {
@@ -53,9 +53,9 @@ module "kubernetes_cluster" {
   resource_group_name = module.resource_group.name
   dns_prefix          = "aksaks1"
   vnet_subnet_id      = module.subnet.subnet
-  ARM_CLIENT_ID = data.azuread_service_principal.akssp.application_id
-  ARM_CLIENT_SECRET = var.ARM_CLIENT_SECRET
-  
+  ARM_CLIENT_ID       = data.azuread_service_principal.akssp.application_id
+  ARM_CLIENT_SECRET   = var.ARM_CLIENT_SECRET
+
 
 }
 
@@ -74,10 +74,9 @@ module "acr" {
   admin_enabled       = false
 }
 module "acr_aks_assignment" {
-  source                           = "./modules/acr-aks-assignment"
-  acr_id                           = module.acr.acr_id
-  aks_principal_id                 = data.azuread_service_principal.akssp.object_id
+  source           = "./modules/acr-aks-assignment"
+  acr_id           = module.acr.acr_id
+  aks_principal_id = data.azuread_service_principal.akssp.object_id
 }
-
 
 

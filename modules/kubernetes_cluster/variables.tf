@@ -20,11 +20,11 @@ variable "vnet_subnet_id" {
 }
 
 variable "ARM_CLIENT_ID" {
-  type = string
+  type      = string
   sensitive = true
 }
 variable "ARM_CLIENT_SECRET" {
-  type = string
+  type      = string
   sensitive = true
 
 }

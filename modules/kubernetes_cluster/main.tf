@@ -19,7 +19,7 @@ resource "azurerm_kubernetes_cluster" "aks" {
     vm_size    = "Standard_D2_v2"
   }
 
- service_principal {
+  service_principal {
     client_id     = var.ARM_CLIENT_ID
     client_secret = var.ARM_CLIENT_SECRET
   }
