@@ -11,7 +11,7 @@ spec:
   source:
     path: manifests
     repoURL: https://github.com/abdimalik2010/Cloud-Native-DevOps-Azure-Kubernetes-Terraform-GitOps
-    targetRevision: master
+    targetRevision: main
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
