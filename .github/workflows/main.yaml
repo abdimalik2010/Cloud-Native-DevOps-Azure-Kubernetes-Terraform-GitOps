@@ -73,3 +73,35 @@ jobs:
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -var "ARM_CLIENT_SECRET=${{ env.ARM_CLIENT_SECRET }}"
+  
+  Deployment:
+    name: Deployment
+    needs: [CD]
+    runs-on: ubuntu-latest
+    env:
+      # Environment variables for CD jobs
+      ARM_ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
+      ARM_ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
+      
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Configure AKS
+        run: az aks get-credentials --resource-group aks-resources --name aks-aks1
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t krooazurecontainerregistry.azurecr.io/my-image:latest .
+          docker login krooazurecontainerregistry.azurecr.io -u ${{ secrets.ACR_USERNAME }} -p ${{ secrets.ACR_PASSWORD }}
+          docker push krooazurecontainerregistry.azurecr.io/my-image:latest
+
+      - name: Deploy Application to AKS
+        run: kubectl apply -f ./src/app.yaml
+
