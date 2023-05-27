@@ -98,7 +98,7 @@ jobs:
       - uses: Azure/k8s-deploy@v1
         with:
           manifests: |
-            manifests/app.yaml
+            deployment.yaml
      
 
          
