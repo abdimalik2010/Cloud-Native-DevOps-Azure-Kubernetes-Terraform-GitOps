@@ -75,30 +75,34 @@ jobs:
         run: terraform apply -auto-approve -var "ARM_CLIENT_SECRET=${{ env.ARM_CLIENT_SECRET }}"
   
   Deployment:
-    name: Deployment
-    needs: [CD]
     runs-on: ubuntu-latest
     env:
-      # Environment variables for CD jobs
-      ARM_ACR_USERNAME: ${{ secrets.ACR_USERNAME }}
-      ARM_ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }}
-      
-
+      # Environment variables for CI jobs
+      ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Install Azure CLI
-        run: |
-          curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
-          az --version
-
-      - name: Login to Azure
-        uses: azure/login@v1
+      - name: Azure login
+        id: login
+        uses: azure/login@v1.4.3
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Set AKS context
+        id: set-context
+        uses: azure/aks-set-context@v3
+        with:
+          resource-group: '${{ secrets.resource_group }}' 
+          cluster-name: '${{ secrets.cluster_name }}'
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'default'
+          manifests: |
+             ./src/app.yaml
 
-      - name: Configure AKS
-        run: az aks get-credentials --resource-group aks-resources --name aks-aks1
-      - name: Deploy Application to AKS
-        run: kubectl apply -f ./src/app.yaml
 
+         
