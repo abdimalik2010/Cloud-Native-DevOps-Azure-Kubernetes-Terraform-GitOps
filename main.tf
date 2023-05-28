@@ -20,7 +20,7 @@ provider "azurerm" {
 }
 provider "azuread" {}
 
-# Service Principal Which is being used by AKS.
+# Service Principal Which is being used by AKS
 data "azuread_service_principal" "akssp" {
   display_name = "akssp2"
 }
