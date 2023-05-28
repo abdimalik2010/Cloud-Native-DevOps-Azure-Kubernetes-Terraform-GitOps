@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - '**.tf'
+      - 'modules/**'
   pull_request:
+    paths:
+      - '**.tf'
+      - 'modules/**'
 
 jobs:
   CI:
