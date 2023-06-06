@@ -48,7 +48,7 @@ module "subnet" {
 
 module "kubernetes_cluster" {
   source              = "./modules/kubernetes_cluster"
-  name                = "aks-aks1"
+  name                = "aks-cluster"
   location            = module.resource_group.location
   resource_group_name = module.resource_group.name
   dns_prefix          = "aksaks1"
