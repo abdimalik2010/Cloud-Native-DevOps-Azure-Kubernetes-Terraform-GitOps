@@ -1,12 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-mysql
   labels:
     app: wordpress
+    app.kubernetes.io/instance: app-argocd
+  name: wordpress-mysql
 spec:
   ports:
-    - port: 3306
+  - port: 3306
+    protocol: TCP
+    targetPort: 3306
   selector:
     app: wordpress
     tier: mysql
