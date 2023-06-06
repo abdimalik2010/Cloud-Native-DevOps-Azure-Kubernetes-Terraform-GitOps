@@ -13,5 +13,5 @@ kubectl get secret -n argocd
 
 kubectl get secret argocd-initial-admin-secret -o yaml -n argocd
 
-## Decode the secret
+## Decode the secrets
 echo "S0dHN3R2dkZWd2trcDRrTQ==" | base64 --decode
