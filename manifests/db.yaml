@@ -13,7 +13,7 @@ spec:
   selector:
     app: wordpress
     tier: mysql
-  type: LoadBalancer
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
