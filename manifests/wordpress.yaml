@@ -1,22 +1,7 @@
 apiVersion: v1
-kind: Service
-metadata:
-  name: wordpress
-  namespace: wordpress
-  labels:
-    app: wordpress
-spec:
-  ports:
-    - port: 80
-  selector:
-    app: wordpress
-    tier: frontend
-  type: LoadBalancer
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wp-pv-claim
+  name: wp-pvc
   namespace: wordpress
   labels:
     app: wordpress
@@ -67,4 +52,22 @@ spec:
       volumes:
       - name: wordpress-persistent-storage
         persistentVolumeClaim:
-          claimName: wp-pv-claim
+          claimName: wp-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: wordpress
+  name: wordpress
+  namespace: wordpress
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: wordpress
+    tier: frontend
+  type: LoadBalancer

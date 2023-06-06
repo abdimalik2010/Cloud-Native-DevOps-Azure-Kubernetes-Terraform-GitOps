@@ -8,9 +8,7 @@ on:
       - '**.tf'
       - 'modules/**'
   pull_request:
-    paths:
-      - '**.tf'
-      - 'modules/**'
+
 
 jobs:
   CI:
